@@ -41,47 +41,39 @@ Cs is a post page starship where the user can add life tips to the rest of the n
 
 ## Routes
 
-| Name            | Method | Endpoint                      | Description                                      | Body                                  | Redirects       |
-| --------------- | ------ | ----------------------------- | ------------------------------------------------ | ------------------------------------- | --------------- |
-| Home            | GET    | /                             | See the main page                                |                                       |                 |
-| Log in form     | GET    | /login                        | See the form to log in                           |                                       |                 |
-| Log in          | POST   | /login                        | Log in the user                                  | {mail, password}                      | /               |
-| Sign Up form    | GET    | /signup                       | See the form to sign up                          |                                       |                 |
-| Sign Up         | POST   | /signup                       | Sign up a user                                   | {mail, password}                      | /profile        |
-| Log out         | GET   | /logout                        | Log out a user                                   |                                       | /               |
-| Profile         | GET    | /profile                      | See the profile page with editable form          |                                       |                 |
-| Profile edited  | POST   | /profile                      | Send user's data changed                         | {user_email, password                 | /profile}       |
-| Collection      | GET    | /collection                   | See user's collection                     |                                       |                 |
-| Game           | GET    | /collection/gameId               | Read game's information                         |                                       |                 |
-| Game add form  | GET    | /collection/new                   | See form to upload a new game                  |                                       |                 |
-| Game add       | POST   | /collection/new                   | Upload a game to user's collection             |                                       | /Collection/gameId |
-| game edit form | GET    | /collection/gameId/edit          | See edit form with game's preloaded information |                                       |                 |
-| game edit      | POST   | /userid/collection/gameId/edit   | Add game's new information                      |                                        | /collection/gameId |
-| game delete    | POST   | /userid/collection/gameId/delete | Delete game from user's collection                 |                                       | /collection         |
+**Name**        **route**           **description**                                 **body**
+  log In        get('/auth/login)   To log in on the page
+  Sign up       post('/auth/signup) To sign up in on the page
+  Posts         get('/')            main page of the website to see all posts
+  Add Post      post('/add)         Add post with a form                            { img, level, theme, body}
+  Edit Post     put('/post/:id)     Edit post with a form                           { img, level, theme, body}
+  Detail post   get('/post/:id)     See post detail
+  Delete post   delete('/post/id)   Delete a post
+  Profile       get('/profile)      acces to the profile page                           
 
 ## Models
 
-Game model
+Post model
 
 ```js
 {
-    Name: String,
-    Year: String,
-    Rating: String,
-    Description: String,
-    Number_of_players: String,
-    Img: String,
-    Playing_time: String,
-    Difficulty: String,  
+    user: _id,
+    date: date,
+    isFav: boolean,
+    body: String,
+    level: String,
+    Img: String, 
+    theme: String
 }
 ```
 User model
 
 ```js
 {
-    Nickname: String,
+    name: String,
     userEmail: String,
     hashedPassword: String,
     Age: Number,
+    img: String
 }
 ```
